@@ -5,7 +5,7 @@ function Sushi({ sushi, eatSushi, budget }) {
   const [eaten, setEaten] = useState(false)
 
   function handleEatenClick(){
-    if(budget - sushi.price >= 0){
+    if(budget - sushi.price >= 0 && !eaten){
       setEaten(!eaten)
       eatSushi(sushi)
     }

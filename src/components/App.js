@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from "react";
 import SushiContainer from "./SushiContainer";
 import Table from "./Table";
-
-
 const API = "http://localhost:3001/sushis";
 
 
+
 function App() {
-  const [sushiList, setSushiList] = useState()
-  const [budget, setBudget] = useState(50)
-  
+  const [sushiList, setSushiList] = useState(null)
+  const [budget, setBudget] = useState(50)  
+  const plates = sushiList !== null ? sushiList.filter(sushi => sushi.eaten) : [];
 
   useEffect(() => {
    fetch(API)
@@ -35,14 +34,16 @@ function App() {
     setSushiList(updatedSushi)
   }
 
-  const plates = (sushiList.filter(sushi => sushi.eaten))
-  
+  function addMoney(){
+    setBudget(budget + 20)
+  }
+
 
 
   return (
     <div className="app">
       {sushiList ? <SushiContainer sushiList={sushiList} eatSushi={eatSushi} budget={budget} /> : <h2>Loading Sushi Bar...</h2>}
-      <Table budget={budget} plates={plates} />
+      <Table budget={budget} plates={plates} addMoney={addMoney} />
     </div>
   );
 }
