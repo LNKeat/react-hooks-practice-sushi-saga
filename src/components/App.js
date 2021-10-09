@@ -35,6 +35,7 @@ function App() {
     setSushiList(updatedSushi)
   }
 
+  const plates = (sushiList.filter(sushi => sushi.eaten))
   
 
 
